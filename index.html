@@ -55,10 +55,22 @@
                 <button id="download-btn" class="btn btn-primary">📥 Download Markdown</button>
                 <button id="email-btn" class="btn btn-secondary">📧 Email to Me</button>
                 <button id="start-over-btn" class="btn btn-outline">🔄 Start Over</button>
+                <button id="choose-new-form-btn" class="btn btn-secondary">🗂️ Choose a New Form</button>
             </div>
             <div id="preview-container" class="preview-box">
                 <h3>Preview:</h3>
                 <pre id="preview-content"></pre>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="modal-overlay" class="modal-overlay hidden">
+            <div class="modal-card">
+                <h3>⚠️ Couldn’t load questionnaire</h3>
+                <p id="modal-message">No questions found.</p>
+                <div class="modal-actions">
+                    <button id="modal-close-btn" class="btn btn-primary">OK</button>
+                </div>
             </div>
         </div>
 

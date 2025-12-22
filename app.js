@@ -6,8 +6,8 @@ class QuestionnaireApp {
         this.answers = {};
         this.originalMarkdown = '';
         this.metadata = {};
-        
         this.initializeEventListeners();
+        this.hideError();
     }
 
     initializeEventListeners() {
@@ -18,6 +18,8 @@ class QuestionnaireApp {
         document.getElementById('download-btn').addEventListener('click', () => this.downloadMarkdown());
         document.getElementById('email-btn').addEventListener('click', () => this.emailResults());
         document.getElementById('start-over-btn').addEventListener('click', () => this.startOver());
+        document.getElementById('choose-new-form-btn').addEventListener('click', () => this.chooseNewForm());
+        document.getElementById('modal-close-btn').addEventListener('click', () => this.hideError());
     }
 
     handleFileUpload(event) {
@@ -43,6 +45,10 @@ class QuestionnaireApp {
     }
 
     parseMarkdown(markdown) {
+        this.metadata = {};
+        this.answers = {};
+        this.currentIndex = 0;
+
         // Extract frontmatter if present
         const frontmatterMatch = markdown.match(/^---\n([\s\S]*?)\n---/);
         if (frontmatterMatch) {
@@ -164,6 +170,12 @@ class QuestionnaireApp {
             });
         });
 
+        if (this.questions.length === 0) {
+            this.showError('No questions found in this file. Please check the format and try again.');
+            this.showUploadSection();
+            return;
+        }
+
         // Initialize answers object with existing answers if present
         this.questions.forEach(q => {
             if (q.type === 'checkbox') {
@@ -183,6 +195,24 @@ class QuestionnaireApp {
 
         this.currentIndex = 0;
         this.showQuestionnaire();
+    }
+
+    showUploadSection() {
+        document.getElementById('upload-section').classList.remove('hidden');
+        document.getElementById('questionnaire-section').classList.add('hidden');
+        document.getElementById('completion-section').classList.add('hidden');
+    }
+
+    showError(message) {
+        const overlay = document.getElementById('modal-overlay');
+        const msg = document.getElementById('modal-message');
+        if (msg) msg.textContent = message || 'Something went wrong.';
+        overlay.classList.remove('hidden');
+    }
+
+    hideError() {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) overlay.classList.add('hidden');
     }
 
     showQuestionnaire() {
@@ -252,32 +282,65 @@ class QuestionnaireApp {
     setupKeyboardShortcuts() {
         const container = document.getElementById('question-container');
         
-        // Add keyboard event listener to the question container
-        container.addEventListener('keydown', (e) => {
+        // Abort previous listener if it exists
+        if (this._keyboardAbortController) {
+            this._keyboardAbortController.abort();
+        }
+        
+        // Create new AbortController for this listener
+        this._keyboardAbortController = new AbortController();
+        const signal = this._keyboardAbortController.signal;
+        
+        // Create handler function
+        const handler = (e) => {
             const isTextarea = e.target.tagName === 'TEXTAREA';
             const isCheckbox = e.target.type === 'checkbox';
             
             // Ctrl+Enter or Shift+Enter = next question (works everywhere including textareas)
             if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
+                // Prevent multiple rapid calls
+                if (this._isNavigating) {
+                    return;
+                }
+                
                 e.preventDefault();
+                e.stopPropagation();
+                this._isNavigating = true;
                 this.nextQuestion();
+                // Reset flag after a short delay
+                setTimeout(() => { this._isNavigating = false; }, 100);
             }
             // Enter key on checkboxes = next question
             else if (e.key === 'Enter' && isCheckbox) {
+                if (this._isNavigating) return;
                 e.preventDefault();
+                e.stopPropagation();
+                this._isNavigating = true;
                 this.nextQuestion();
+                setTimeout(() => { this._isNavigating = false; }, 100);
             }
             // Enter key on textarea without modifiers = allow normal behavior (new line)
             // Arrow keys with Ctrl/Cmd for navigation
             else if (e.key === 'ArrowLeft' && (e.ctrlKey || e.metaKey)) {
+                if (this._isNavigating) return;
                 e.preventDefault();
+                e.stopPropagation();
+                this._isNavigating = true;
                 this.prevQuestion();
+                setTimeout(() => { this._isNavigating = false; }, 100);
             }
             else if (e.key === 'ArrowRight' && (e.ctrlKey || e.metaKey)) {
+                if (this._isNavigating) return;
                 e.preventDefault();
+                e.stopPropagation();
+                this._isNavigating = true;
                 this.nextQuestion();
+                setTimeout(() => { this._isNavigating = false; }, 100);
             }
-        });
+        };
+        
+        // Add the listener with AbortSignal
+        container.addEventListener('keydown', handler, { signal });
 
         // Focus the first textarea for better UX (skip checkboxes)
         const firstTextarea = container.querySelector('textarea');
@@ -328,6 +391,17 @@ class QuestionnaireApp {
         
         const markdown = this.generateMarkdown();
         document.getElementById('preview-content').textContent = markdown;
+    }
+
+    chooseNewForm() {
+        this.questions = [];
+        this.answers = {};
+        this.metadata = {};
+        this.currentIndex = 0;
+        document.getElementById('markdown-input').value = '';
+        document.getElementById('file-input').value = '';
+        this.hideError();
+        this.showUploadSection();
     }
 
     generateMarkdown() {
