@@ -1,20 +1,29 @@
-# 📋 QuestMD
+# 📋 QuestMD - Markdown Questionnaire Builder
 
-**QuestMD** (Questionnaire Markdown) - Turn your markdown questionnaires into beautiful, interactive forms. Perfect for surveys, assessments, or any structured Q&A.
+**QuestMD** (Questionnaire Markdown) - A free, open-source tool to convert markdown questionnaires into beautiful, interactive web forms. Perfect for creating surveys, health assessments, employee questionnaires, client intake forms, and any structured Q&A workflow.
 
-🌐 **[Try QuestMD Live →](https://wtullos.github.io/questmd/)**
+🌐 **[Try QuestMD Live →](https://wtullos.github.io/questmd/)** - No installation required!
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## What is QuestMD?
+
+QuestMD is a lightweight, client-side web application that transforms markdown-formatted questionnaires into user-friendly, interactive forms. Built with vanilla JavaScript, HTML, and CSS—no frameworks, no build process, no dependencies. Simply upload your markdown file or paste it directly, answer questions one at a time with progress tracking, and export clean markdown output perfect for Notion, documentation, or further processing.
+
+**Keywords:** markdown questionnaire, interactive form builder, survey tool, markdown to form converter, questionnaire generator, health assessment form, client intake form, markdown parser, web form builder, open source questionnaire tool
+
 ## ✨ Features
 
-- 📝 **Parse markdown questionnaires** - Upload or paste your `.md` files
-- 🎯 **One question at a time** - Focused experience with progress tracking
-- ✅ **Multiple question types** - Text, checkboxes, and multi-part questions
-- 💾 **Download results** - Get clean markdown output perfect for Notion
-- 📧 **Email support** - Send results directly to yourself
-- 🎨 **Beautiful UI** - Modern, responsive design
-- 🚀 **Zero dependencies** - Pure HTML/CSS/JavaScript, no build process needed
+- 📝 **Markdown Questionnaire Parser** - Upload or paste your `.md` files with automatic question detection
+- 🎯 **One Question at a Time** - Focused, distraction-free experience with progress tracking
+- ✅ **Multiple Question Types** - Supports text inputs, checkboxes, and multi-part questions
+- 💾 **Export to Markdown** - Download clean, formatted markdown output perfect for Notion, Obsidian, or any markdown editor
+- 📧 **Email Results** - Send completed questionnaires directly to yourself via email
+- ⌨️ **Keyboard Shortcuts** - Navigate with Ctrl+Enter, Shift+Enter, and arrow keys for faster completion
+- 🎨 **Modern UI** - Beautiful, responsive design that works on desktop and mobile
+- 🚀 **Zero Dependencies** - Pure HTML/CSS/JavaScript - no npm, no build process, no frameworks
+- 🔒 **Privacy-First** - All processing happens client-side - your data never leaves your browser
+- 📱 **Mobile-Friendly** - Responsive design works seamlessly on phones and tablets
 
 ## 🚀 Quick Start
 
@@ -71,13 +80,29 @@ title: My Questionnaire
 - **Vercel**: Connect your GitHub repo
 - **Any web server**: Upload the files - no server-side code needed
 
-## 🛠️ Development
+## 🛠️ Technical Details
 
-This is a pure client-side application with no build process:
+QuestMD is built with vanilla web technologies - no frameworks, no build tools, no dependencies:
 
-- `index.html` - Main application structure
-- `styles.css` - All styling
-- `app.js` - Application logic and markdown parsing
+- **Frontend:** Pure HTML5, CSS3, and JavaScript (ES6+)
+- **Markdown Parsing:** Custom regex-based parser for questionnaire format
+- **Storage:** Browser localStorage for session persistence
+- **File Handling:** HTML5 File API for markdown file uploads
+- **Export:** Blob API for markdown file downloads
+
+### Project Structure
+
+- `index.html` - Main application structure and UI
+- `styles.css` - All styling and responsive design
+- `app.js` - Application logic, markdown parsing, and form handling
+
+### Browser Support
+
+Works in all modern browsers:
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
 
 ## 📄 License
 
@@ -91,14 +116,49 @@ Contributions welcome! Feel free to:
 - Submit pull requests
 - Share your use cases
 
-## 💡 Use Cases
+## 💡 Use Cases & Examples
 
-- Surveys and assessments
-- Employee questionnaires
-- Client intake forms
-- Research questionnaires
-- Any structured Q&A that needs to be converted to markdown
+QuestMD is perfect for:
+
+- **Health Assessments** - Create detailed health questionnaires and intake forms
+- **Employee Surveys** - HR questionnaires, feedback forms, onboarding surveys
+- **Client Intake Forms** - Professional service intake questionnaires
+- **Research Questionnaires** - Academic research data collection forms
+- **Event Registration** - Custom registration forms with structured questions
+- **Application Forms** - Job applications, program applications, membership forms
+- **Feedback Forms** - Customer feedback, product feedback, service evaluation
+- **Educational Assessments** - Student evaluations, course feedback forms
+- **Any Structured Q&A** - Convert any markdown questionnaire into an interactive form
+
+### Why Use QuestMD?
+
+- **No Account Required** - Use it immediately without signing up
+- **Works Offline** - Download and use locally without internet
+- **Privacy-Focused** - Your data stays in your browser
+- **Easy Integration** - Export to Notion, Obsidian, or any markdown-compatible tool
+- **Version Control Friendly** - Store questionnaires as markdown files in Git
+- **Customizable** - Open source code you can modify for your needs
+
+## 🔍 Related Tools & Alternatives
+
+QuestMD fills a unique niche - converting markdown questionnaires to interactive forms. If you're looking for:
+- **Form Builders:** Google Forms, Typeform, JotForm
+- **Markdown Editors:** Obsidian, Notion, Markdown editors
+- **Survey Tools:** SurveyMonkey, Qualtrics, LimeSurvey
+- **Questionnaire Converters:** QuestMD (this tool!)
+
+## 📚 Learn More
+
+- **Markdown Guide:** [Markdown Syntax](https://www.markdownguide.org/)
+- **Notion Integration:** Export completed forms directly to Notion databases
+- **GitHub Pages:** Host your own instance for free
+
+## 🌟 Star This Repo
+
+If QuestMD helps you, please consider giving it a ⭐ on GitHub! It helps others discover this tool.
 
 ---
 
-Made with ❤️ for better markdown workflows
+**Made with ❤️ for better markdown workflows**
+
+**Tags:** `markdown` `questionnaire` `survey` `form-builder` `interactive-forms` `markdown-parser` `web-app` `vanilla-javascript` `open-source` `notion` `client-side` `privacy-focused`
