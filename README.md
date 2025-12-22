@@ -1,6 +1,8 @@
 # 📋 QuestMD
 
-**QuestMD** (Questionnaire Markdown) - Turn your markdown questionnaires into beautiful, interactive forms. Perfect for health assessments, surveys, or any structured Q&A.
+**QuestMD** (Questionnaire Markdown) - Turn your markdown questionnaires into beautiful, interactive forms. Perfect for surveys, assessments, or any structured Q&A.
+
+🌐 **[Try QuestMD Live →](https://wtullos.github.io/questmd/)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -17,10 +19,11 @@
 ## 🚀 Quick Start
 
 ### Option 1: Use the Live Demo
-Visit the [GitHub Pages site](https://yourusername.github.io/questmd/) (once deployed)
+🌐 **[Try QuestMD Live →](https://wtullos.github.io/questmd/)**  
+Visit **[https://wtullos.github.io/questmd/](https://wtullos.github.io/questmd/)** - no installation needed!
 
 ### Option 2: Run Locally
-1. Clone this repository
+1. Clone this repository: `git clone https://github.com/wtullos/questmd.git`
 2. Open `index.html` in your web browser
 3. That's it! No build process needed.
 
@@ -90,8 +93,8 @@ Contributions welcome! Feel free to:
 
 ## 💡 Use Cases
 
-- Health assessments and questionnaires
-- Employee surveys
+- Surveys and assessments
+- Employee questionnaires
 - Client intake forms
 - Research questionnaires
 - Any structured Q&A that needs to be converted to markdown

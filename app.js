@@ -244,6 +244,47 @@ class QuestionnaireApp {
         document.getElementById('prev-btn').disabled = this.currentIndex === 0;
         document.getElementById('next-btn').textContent = 
             this.currentIndex === this.questions.length - 1 ? 'Finish →' : 'Next →';
+        
+        // Add keyboard shortcuts after rendering
+        this.setupKeyboardShortcuts();
+    }
+
+    setupKeyboardShortcuts() {
+        const container = document.getElementById('question-container');
+        
+        // Add keyboard event listener to the question container
+        container.addEventListener('keydown', (e) => {
+            const isTextarea = e.target.tagName === 'TEXTAREA';
+            const isCheckbox = e.target.type === 'checkbox';
+            
+            // Ctrl+Enter or Shift+Enter = next question (works everywhere including textareas)
+            if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
+                e.preventDefault();
+                this.nextQuestion();
+            }
+            // Enter key on checkboxes = next question
+            else if (e.key === 'Enter' && isCheckbox) {
+                e.preventDefault();
+                this.nextQuestion();
+            }
+            // Enter key on textarea without modifiers = allow normal behavior (new line)
+            // Arrow keys with Ctrl/Cmd for navigation
+            else if (e.key === 'ArrowLeft' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                this.prevQuestion();
+            }
+            else if (e.key === 'ArrowRight' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                this.nextQuestion();
+            }
+        });
+
+        // Focus the first textarea for better UX (skip checkboxes)
+        const firstTextarea = container.querySelector('textarea');
+        if (firstTextarea) {
+            // Small delay to ensure DOM is ready
+            setTimeout(() => firstTextarea.focus(), 100);
+        }
     }
 
     formatQuestionText(text) {

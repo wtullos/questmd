@@ -15,7 +15,7 @@
 Run these commands in your terminal (from the app directory):
 
 ```bash
-cd "/Users/wesleytullos/Documents/Laptop Sync Folder/Wes's Vault/Wes Health/Un-Named Health App"
+cd "/Users/wesleytullos/Documents/Laptop Sync Folder/Wes's Vault/Wes Health/QuestMD"
 
 # Add GitHub remote (replace YOUR_USERNAME with your GitHub username)
 git remote add origin https://github.com/YOUR_USERNAME/questmd.git
@@ -39,8 +39,10 @@ git push -u origin main
 
 Your app will be live at:
 ```
-https://YOUR_USERNAME.github.io/questmd/
+https://wtullos.github.io/questmd/
 ```
+
+**Live example**: [https://wtullos.github.io/questmd/](https://wtullos.github.io/questmd/)
 
 It may take a few minutes for GitHub to build and deploy your site.
 

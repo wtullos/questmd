@@ -6,7 +6,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
     min-height: 100vh;
     padding: 20px;
     color: #333;
@@ -19,10 +19,13 @@ body {
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 40px);
 }
 
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
     color: white;
     padding: 30px;
     text-align: center;
@@ -64,7 +67,7 @@ header p {
 .upload-label {
     display: inline-block;
     padding: 15px 30px;
-    background: #667eea;
+    background: #22c55e;
     color: white;
     border-radius: 8px;
     cursor: pointer;
@@ -73,7 +76,7 @@ header p {
 }
 
 .upload-label:hover {
-    background: #5568d3;
+    background: #16a34a;
 }
 
 #markdown-input {
@@ -106,7 +109,7 @@ header p {
 
 #progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
     transition: width 0.3s;
     width: 0%;
 }
@@ -116,6 +119,14 @@ header p {
     color: #666;
     font-size: 0.9em;
     margin-bottom: 30px;
+}
+
+.keyboard-hint {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: #999;
+    font-style: italic;
 }
 
 /* Question Container */
@@ -129,7 +140,7 @@ header p {
     padding: 20px;
     background: #f8f9fa;
     border-radius: 8px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #22c55e;
 }
 
 .question-item h3 {
@@ -159,7 +170,7 @@ header p {
 
 .question-item textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #22c55e;
 }
 
 .question-item .checkbox-group {
@@ -194,7 +205,7 @@ header p {
 }
 
 .section-header {
-    background: #667eea;
+    background: #22c55e;
     color: white;
     padding: 15px 20px;
     border-radius: 8px 8px 0 0;
@@ -223,14 +234,14 @@ header p {
 }
 
 .btn-primary {
-    background: #667eea;
+    background: #22c55e;
     color: white;
 }
 
 .btn-primary:hover {
-    background: #5568d3;
+    background: #16a34a;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
 }
 
 .btn-secondary {
@@ -244,8 +255,8 @@ header p {
 
 .btn-outline {
     background: white;
-    color: #667eea;
-    border: 2px solid #667eea;
+    color: #22c55e;
+    border: 2px solid #22c55e;
 }
 
 .btn-outline:hover {
@@ -294,6 +305,39 @@ header p {
     word-wrap: break-word;
 }
 
+/* Footer */
+.app-footer {
+    background: #f8f9fa;
+    border-top: 1px solid #e5e7eb;
+    padding: 20px 40px;
+    margin-top: auto;
+}
+
+.footer-content {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.85em;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+.footer-content kbd {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #374151;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content strong {
+    color: #374151;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .container {
@@ -319,6 +363,14 @@ header p {
 
     .action-buttons .btn {
         width: 100%;
+    }
+
+    .app-footer {
+        padding: 15px 20px;
+    }
+
+    .footer-content {
+        font-size: 0.8em;
     }
 }
 
