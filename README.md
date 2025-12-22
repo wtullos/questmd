@@ -20,7 +20,7 @@
 
 ### Option 1: Use the Live Demo
 🌐 **[Try QuestMD Live →](https://wtullos.github.io/questmd/)**  
-Visit **[https://wtullos.github.io/questmd/](https://wtullos.github.io/questmd/)** - no installation needed!
+- no installation needed!
 
 ### Option 2: Run Locally
 1. Clone this repository: `git clone https://github.com/wtullos/questmd.git`
