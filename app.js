@@ -17,6 +17,7 @@ class QuestionnaireApp {
         document.getElementById('prev-btn').addEventListener('click', () => this.prevQuestion());
         document.getElementById('download-btn').addEventListener('click', () => this.downloadMarkdown());
         document.getElementById('email-btn').addEventListener('click', () => this.emailResults());
+        document.getElementById('copy-btn').addEventListener('click', () => this.copyToClipboard());
         document.getElementById('start-over-btn').addEventListener('click', () => this.startOver());
         document.getElementById('choose-new-form-btn').addEventListener('click', () => this.chooseNewForm());
         document.getElementById('modal-close-btn').addEventListener('click', () => this.hideError());
@@ -481,6 +482,62 @@ class QuestionnaireApp {
         const body = encodeURIComponent(markdown);
         const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
         window.location.href = mailtoLink;
+    }
+
+    copyToClipboard() {
+        const markdown = this.generateMarkdown();
+        
+        // Use the modern Clipboard API if available
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(markdown).then(() => {
+                this.showCopySuccess();
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                this.fallbackCopyToClipboard(markdown);
+            });
+        } else {
+            // Fallback for older browsers
+            this.fallbackCopyToClipboard(markdown);
+        }
+    }
+
+    fallbackCopyToClipboard(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                this.showCopySuccess();
+            } else {
+                alert('Failed to copy to clipboard. Please select and copy the text manually.');
+            }
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            alert('Failed to copy to clipboard. Please select and copy the text manually.');
+        }
+        
+        document.body.removeChild(textArea);
+    }
+
+    showCopySuccess() {
+        const copyBtn = document.getElementById('copy-btn');
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = '✅ Copied!';
+        copyBtn.classList.add('btn-primary');
+        copyBtn.classList.remove('btn-secondary');
+        
+        setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.classList.remove('btn-primary');
+            copyBtn.classList.add('btn-secondary');
+        }, 2000);
     }
 
     startOver() {
