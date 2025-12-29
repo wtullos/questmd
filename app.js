@@ -7,6 +7,7 @@ class QuestionnaireApp {
         this.originalMarkdown = '';
         this.metadata = {};
         this.initializeEventListeners();
+        this.initializeTheme();
         this.hideError();
     }
 
@@ -21,6 +22,43 @@ class QuestionnaireApp {
         document.getElementById('start-over-btn').addEventListener('click', () => this.startOver());
         document.getElementById('choose-new-form-btn').addEventListener('click', () => this.chooseNewForm());
         document.getElementById('modal-close-btn').addEventListener('click', () => this.hideError());
+        document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
+    }
+
+    initializeTheme() {
+        // Check for saved theme preference or default to system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme) {
+            this.setTheme(savedTheme);
+        } else if (systemPrefersDark) {
+            this.setTheme('dark');
+        } else {
+            this.setTheme('light');
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                this.setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    }
+
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    }
+
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const themeIcon = document.getElementById('theme-icon');
+        if (themeIcon) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
     }
 
     handleFileUpload(event) {
