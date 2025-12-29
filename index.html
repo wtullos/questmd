@@ -9,9 +9,17 @@
 <body>
     <div class="container">
         <header>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-                <span id="theme-icon">🌙</span>
-            </button>
+            <div class="menu-container">
+                <button id="menu-toggle" class="menu-toggle" aria-label="Menu">
+                    <span class="hamburger-icon">☰</span>
+                </button>
+                <div id="menu-dropdown" class="menu-dropdown hidden">
+                    <button id="theme-toggle" class="menu-item" aria-label="Toggle dark mode">
+                        <span id="theme-icon">🌙</span>
+                        <span>Dark Mode</span>
+                    </button>
+                </div>
+            </div>
             <h1>📋 QuestMD</h1>
             <p class="tagline">Turn markdown questionnaires into interactive forms</p>
             <p>Upload a markdown questionnaire file to get started</p>

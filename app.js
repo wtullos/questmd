@@ -22,7 +22,23 @@ class QuestionnaireApp {
         document.getElementById('start-over-btn').addEventListener('click', () => this.startOver());
         document.getElementById('choose-new-form-btn').addEventListener('click', () => this.chooseNewForm());
         document.getElementById('modal-close-btn').addEventListener('click', () => this.hideError());
-        document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
+        document.getElementById('menu-toggle').addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleMenu();
+        });
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            this.toggleTheme();
+            this.toggleMenu(); // Close menu after toggling theme
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('menu-dropdown');
+            const menuToggle = document.getElementById('menu-toggle');
+            if (menu && menuToggle && !menu.contains(e.target) && !menuToggle.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
     }
 
     initializeTheme() {
@@ -58,6 +74,13 @@ class QuestionnaireApp {
         const themeIcon = document.getElementById('theme-icon');
         if (themeIcon) {
             themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+
+    toggleMenu() {
+        const menu = document.getElementById('menu-dropdown');
+        if (menu) {
+            menu.classList.toggle('hidden');
         }
     }
 
